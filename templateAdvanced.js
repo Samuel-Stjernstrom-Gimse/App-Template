@@ -59,12 +59,12 @@ const getData =  () => {
         completed++
 
         if (completed  >= length) {
-            afterGetData();
+            afterGetData().catch(console.error)
         }
     };
 
     if (length === 0) {
-        afterGetData()
+        afterGetData().catch(console.error)
     } else {
         forEach(ds => ds.refreshDataSource(handleFetching));
     }
@@ -74,7 +74,9 @@ const main = async () => {
     try {
         await beforeGetData();
         
-        await Promise.all([getData(), fetchGridData(), notDependantOnGetData()])
+        getData()
+
+        await Promise.all([fetchGridData(), notDependantOnGetData()])
     } catch (error) {
         console.error('Error in main:', error);
     }
