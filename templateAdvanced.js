@@ -44,26 +44,27 @@ const notDependantOnGetData = async () => {
 
 const fetchGridData = async () => {
     try {
-        // dsForGrid.refreshDataSource(); 
+        const {forEach} = [/* ds1, ds2, ds3*/]
+        forEach(ds => ds.refreshDataSource())
     } catch (error) {
-        console.error('Fetch Grid Data error:', error);
+        console.error('Error fetching grid data:', error);
     }
 };
 
-const getData = async  () => {
-    const {forEach, length} = [/* list of data sources that have dependent functions in afterGetData */];
+const getData =  () => {
+    const { forEach, length } = [/* list of data sources that have dependent functions in afterGetData */];
     let completed  = 0;
 
-    const handleFetching = async  () => {
+    const handleFetching =  () => {
         completed++
 
         if (completed  >= length) {
-            await afterGetData();
+            afterGetData();
         }
     };
 
     if (length === 0) {
-        await afterGetData()
+        afterGetData()
     } else {
         forEach(ds => ds.refreshDataSource(handleFetching));
     }
