@@ -1,31 +1,19 @@
 /*//////////////| ADVANCED TEMPLATE FOR WAITING ON DS DATA AND ASYNC OPERATIONS |/////////////////*/
 
-/*-------------------------==>  GLOBAL VARIABLES ONLY HERE  <==-----------------------------------------*/
-/*
-const globalCounter = 0
-let globalBool = false
-*/
+/*<~G~>--------------------------| GLOBAL VARIABLES ONLY HERE |------------------------------<~G~>*/
+const gDELETEme1 = 0
 
-/*-------------------------==>  FUNCTIONS HERE OR SEPERATE FILE  <==-------------------------------------*/
-
-/*
-const mockUpFunc = async (url) => {
-	try {
-		const result = await fetch(url, { method: 'GET', headers: headers })
-		listArray = await result.json()
-	} catch (error) {
-		console.log(error)
-	}
+/*<~F~>--------------------------| FUNCTIONS HERE OR SEPARATE FILE |-------------------------<~F~>*/
+const DELETEme = async (url, headers) => {
+    try {
+        const result = await fetch(url, {method: 'GET', headers: headers})
+        return await result.json()
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-const mockUp = (a,b) => a + b
-
-      CALL FUNCTIONS INN INIT ==>
-*/
-
-
-/*------------------------ ==>  INIT FUNCTIONS  <== -----------------------------------------------------*/
-
+/*<~In~>-------------------------| INIT FUNCTIONS |----------------------------------------<~In~>*/
 const beforeGetData = async () => {
     try {
         // Non-blocking funcs here (ideally)
@@ -40,7 +28,7 @@ const beforeGetData = async () => {
 };
 
 const afterGetData = async () => {
-    try { 
+    try {
         // Non-blocking funcs here (ideally)
 
         await Promise.all([/* asyncFunc1, asyncFunc2 */]); // parallel execution
@@ -74,14 +62,14 @@ const fetchGridData = async () => {
     }
 };
 
-const getData =  () => {
-    const  { forEach, length } = [/* list of data sources that have dependent functions in afterGetData */];
-    let completed  = 0;
+const getData = () => {
+    const {forEach, length} = [/* list of data sources that have dependent functions in afterGetData */];
+    let completed = 0;
 
-    const handleFetching =  () => {
+    const handleFetching = () => {
         completed++
 
-        if (completed  >= length) {
+        if (completed >= length) {
             afterGetData().catch(console.error)
         }
     };
@@ -96,7 +84,7 @@ const getData =  () => {
 const main = async () => {
     try {
         await beforeGetData();
-        
+
         getData()
 
         await Promise.all([fetchGridData(), notDependantOnGetData()])
@@ -105,9 +93,7 @@ const main = async () => {
     }
 };
 
-
-/*-------------------------==>  ONLY MAIN() UNDER  <==-----------------------------------------------------*/
-
+/*<~M~>----------------------| ONLY MAIN() |----------------------------------------<~M~>*/
 main().catch(console.error);
 
 /*
@@ -116,5 +102,4 @@ Notes:
       but you want it to be treated as a resolved promise. This does not make it async it still blocks.
 
     - Make functions with async/await to handle asynchronous operations properly.
-
  */
