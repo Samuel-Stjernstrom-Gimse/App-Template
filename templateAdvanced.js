@@ -1,12 +1,12 @@
 /*//////////////| ADVANCED TEMPLATE FOR WAITING ON DS DATA AND ASYNC OPERATIONS |/////////////////*/
 
-/*-----------------| GLOBAL VARIABLES ONLY HERE  |------------------------------------------------------*/
+/*-------------------------==>  GLOBAL VARIABLES ONLY HERE  <==-----------------------------------------*/
 /*
 const globalCounter = 0
 let globalBool = false
 */
 
-/*--------------------| FUNCTIONS HERE OR SEPERATE FILE |-------------------------------------*/
+/*-------------------------==>  FUNCTIONS HERE OR SEPERATE FILE  <==-------------------------------------*/
 
 /*
 const mockUpFunc = async (url) => {
@@ -19,18 +19,21 @@ const mockUpFunc = async (url) => {
 }
 
 const mockUp = (a,b) => a + b
+
+      CALL FUNCTIONS INN INIT ==>
 */
 
-/*-----------------| INIT FUNCTIONS |----------------------------------------------------------*/
+
+/*------------------------ ==>  INIT FUNCTIONS  <== -----------------------------------------------------*/
+
 const beforeGetData = async () => {
     try {
-        /*
-        synchronousFunction1()
-        synchronousFunction2()
-        ....
-        */
-        await Promise.all([/*asyncFunc1(), asyncFunc2()....*/]);
-        await Promise.all([/*dependentFunc1(), dependentFunc2()....*/]);
+        // Non-blocking funcs here (ideally)
+
+        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // parallel execution
+        await Promise.all([/* dAsyncFunc1, dAsyncFunc2 */]); // Add more blocks as needed
+
+        // Synchronous/blocking funcs here (ideally)
     } catch (error) {
         console.error('Error in beforeGetData:', error);
     }
@@ -38,13 +41,12 @@ const beforeGetData = async () => {
 
 const afterGetData = async () => {
     try { 
-        /*
-        synchronousFunction3()
-        synchronousFunction4()
-        ....
-        */
-        await Promise.all([/*asyncFunc3(), asyncFunc4()....*/]);
-        await Promise.all([/*dependentFunc3(), dependentFunc4()....*/]);
+        // Non-blocking funcs here (ideally)
+
+        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // parallel execution
+        await Promise.all([/* dAsyncFunc1, dAsyncFunc2 */]); // Add more blocks as needed
+
+        // Synchronous/blocking funcs here (ideally)
     } catch (error) {
         console.error('Error in afterGetData:', error);
     }
@@ -52,13 +54,12 @@ const afterGetData = async () => {
 
 const notDependantOnGetData = async () => {
     try {
-        /*
-        synchronousFunction5()
-        synchronousFunction6()
-        ....
-        */
-        await Promise.all([/*asyncFunc5(), asyncFunc6()....*/]);
-        await Promise.all([/*dependentFunc5(), dependentFunc6()....*/]);
+        // Non-blocking funcs here (ideally)
+
+        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // parallel execution
+        await Promise.all([/* dAsyncFunc1, dAsyncFunc2 */]); // Add more blocks as needed
+
+        // Synchronous/blocking funcs here (ideally)
     } catch (error) {
         console.error('Error in notDependantOnGetData:', error);
     }
@@ -105,7 +106,7 @@ const main = async () => {
 };
 
 
-/*------------------| ONLY MAIN() UNDER HERE |-----------------*/
+/*-------------------------==>  ONLY MAIN() UNDER  <==-----------------------------------------------------*/
 
 main().catch(console.error);
 
