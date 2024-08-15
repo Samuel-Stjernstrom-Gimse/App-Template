@@ -1,5 +1,27 @@
-/*-----| ADVANCED TEMPLATE FOR WAITING ON DS DATA AND ASYNC OPERATIONS |-----*/
+/*//////////////| ADVANCED TEMPLATE FOR WAITING ON DS DATA AND ASYNC OPERATIONS |/////////////////*/
 
+/*-----------------| GLOBAL VARIABLES ONLY HERE  |------------------------------------------------------*/
+/*
+const globalCounter = 0
+let globalBool = false
+*/
+
+/*--------------------| FUNCTIONS HERE OR SEPERATE FILE |-------------------------------------*/
+
+/*
+const mockUpFunc = async (url) => {
+	try {
+		const result = await fetch(url, { method: 'GET', headers: headers })
+		listArray = await result.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+const mockUp = (a,b) => a + b
+*/
+
+/*-----------------| INIT FUNCTIONS |----------------------------------------------------------*/
 const beforeGetData = async () => {
     try {
         /*
@@ -52,7 +74,7 @@ const fetchGridData = async () => {
 };
 
 const getData =  () => {
-    const { forEach, length } = [/* list of data sources that have dependent functions in afterGetData */];
+    const  { forEach, length } = [/* list of data sources that have dependent functions in afterGetData */];
     let completed  = 0;
 
     const handleFetching =  () => {
@@ -66,7 +88,7 @@ const getData =  () => {
     if (length === 0) {
         afterGetData().catch(console.error)
     } else {
-        forEach(ds => ds.refreshDataSource(handleFetching));
+        forEach(ds => ds.refreshDataSource(handleFetching)); // non Blocking
     }
 };
 
@@ -82,9 +104,10 @@ const main = async () => {
     }
 };
 
-main().catch(console.error);
 
-console.log('error')
+/*------------------| ONLY MAIN() UNDER HERE |-----------------*/
+
+main().catch(console.error);
 
 /*
 Notes:
