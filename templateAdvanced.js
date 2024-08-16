@@ -1,105 +1,101 @@
 /*//////////////| ADVANCED TEMPLATE FOR WAITING ON DS DATA AND ASYNC OPERATIONS |/////////////////*/
 
 /*<~G~>--------------------------| GLOBAL VARIABLES ONLY HERE |------------------------------<~G~>*/
-const gDELETEme1 = 0
 
 /*<~F~>--------------------------| FUNCTIONS HERE OR SEPARATE FILE |-------------------------<~F~>*/
-const DELETEme = async (url, headers) => {
-    try {
-        const result = await fetch(url, {method: 'GET', headers: headers})
-        return await result.json()
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 /*<~In~>-------------------------| INIT FUNCTIONS |----------------------------------------<~In~>*/
-const beforeGetData = async () => {
+
+const executeBeforeDataFetch = async () => {
     try {
-        // Non-blocking funcs here (ideally)
+        // Non-blocking functions here (ideally)
 
-        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // parallel execution
-        await Promise.all([/* dAsyncFunc1, dAsyncFunc2 */]); // Add more blocks as needed
+        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // Parallel execution
+        await Promise.all([/* dependentAsyncFunc1, dependentAsyncFunc2 */]); // Add more blocks as needed
 
-        // Synchronous/blocking funcs here (ideally)
+        // Synchronous/blocking functions here (ideally)
     } catch (error) {
-        console.error('Error in beforeGetData:', error);
+        console.error('Error in executeBeforeDataFetch:', error);
     }
 };
 
-const afterGetData = async () => {
+const executeAfterDataFetch1 = async () => { // Create one of these for every fetchDataInParallel() call
     try {
-        // Non-blocking funcs here (ideally)
+        // Non-blocking functions here (ideally)
 
-        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // parallel execution
-        await Promise.all([/* dAsyncFunc1, dAsyncFunc2 */]); // Add more blocks as needed
+        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // Parallel execution
+        await Promise.all([/* dependentAsyncFunc1, dependentAsyncFunc2 */]); // Add more blocks as needed
 
-        // Synchronous/blocking funcs here (ideally)
+        // Synchronous/blocking functions here (ideally)
     } catch (error) {
-        console.error('Error in afterGetData:', error);
+        console.error('Error in executeAfterDataFetch1:', error);
     }
 };
 
-const notDependantOnGetData = async () => {
+const runIndependentTasks = async () => { // feks single ds callbak initiliser here
     try {
-        // Non-blocking funcs here (ideally)
+        // Non-blocking functions here (ideally)
 
-        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // parallel execution
-        await Promise.all([/* dAsyncFunc1, dAsyncFunc2 */]); // Add more blocks as needed
+        await Promise.all([/* asyncFunc1, asyncFunc2 */]); // Parallel execution
+        await Promise.all([/* dependentAsyncFunc1, dependentAsyncFunc2 */]); // Add more blocks as needed
 
-        // Synchronous/blocking funcs here (ideally)
+        // Synchronous/blocking functions here (ideally)
     } catch (error) {
-        console.error('Error in notDependantOnGetData:', error);
+        console.error('Error in runIndependentTasks:', error);
     }
 };
 
-const fetchGridData = async () => {
+const refreshGridData = async () => {
     try {
-        const {forEach} = [/* ds1, ds2, ds3*/]
-        forEach(ds => ds.refreshDataSource())
+        const {forEach} = [/* ds1, ds2, ds3 */];
+        forEach(ds => ds?.refreshDataSource());
     } catch (error) {
-        console.error('Error fetching grid data:', error);
+        console.error('Error refreshing grid data:', error);
     }
 };
 
-const getData = () => {
-    const {forEach, length} = [/* list of data sources that have dependent functions in afterGetData */];
-    let completed = 0;
+const fetchDataInParallel = (dataSources, callback) => {
+    let completedCount = 0;
 
-    const handleFetching = () => {
-        completed++
+    const onFetchComplete = () => {
+        completedCount++;
 
-        if (completed >= length) {
-            afterGetData().catch(console.error)
+        if (completedCount >= dataSources.length) {
+            callback().catch(console.error);
         }
     };
 
-    if (length === 0) {
-        afterGetData().catch(console.error)
+    if (dataSources.length === 0) {
+        callback().catch(console.error);
     } else {
-        forEach(ds => ds.refreshDataSource(handleFetching)); // non Blocking
+        dataSources.forEach(ds => ds?.refreshDataSource(onFetchComplete)); // Non-blocking
     }
 };
 
 const main = async () => {
+    const dataSourcesGroup1 = [/* ds1, ds2, ds3 */];
+
     try {
-        await beforeGetData();
+        await executeBeforeDataFetch();
 
-        getData()
+        fetchDataInParallel(dataSourcesGroup1, executeAfterDataFetch1);
+        /* fetchDataInParallel(dataSourcesGroup2, executeAfterDataFetch2) */
 
-        await Promise.all([fetchGridData(), notDependantOnGetData()])
+        await Promise.all([refreshGridData(), runIndependentTasks()]);
     } catch (error) {
         console.error('Error in main:', error);
     }
 };
 
 /*<~M~>----------------------| ONLY MAIN() |----------------------------------------<~M~>*/
+
 main().catch(console.error);
 
 /*
 Notes:
     - Use Promise.resolve() if a function inside Promise.all([]) does not return a promise
-      but you want it to be treated as a resolved promise. This does not make it async it still blocks.
+      but you want it to be treated as a resolved promise. This does not make it async; it still blocks.
 
-    - Make functions with async/await to handle asynchronous operations properly.
+    - Create functions with async/await to handle asynchronous operations properly.
+    - fetchDataInParallel loads data sources in parallel and then runs the corresponding after-fetch functions.
  */
