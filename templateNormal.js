@@ -55,7 +55,7 @@ const main = async () => {
     try {
         await executeBeforeDataFetch();
 
-        fetchDataInParallel(dataSourcesGroup1, executeAfterDataFetch);
+        fetchDataInParallel(dataSourcesGroup, executeAfterDataFetch);
         
     } catch (error) {
         console.error('Error in main:', error);
