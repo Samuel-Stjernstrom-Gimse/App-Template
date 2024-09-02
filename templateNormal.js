@@ -1,6 +1,8 @@
 /*//////////////| NORMAL TEMPLATE FOR WAITING ON DS DATA AND ASYNC OPERATIONS |/////////////////*/
 
 /*<~G~>--------------------------| GLOBAL VARIABLES HERE |-----------------------------------<~G~>*/
+const depndantData = [/* ds1, ds2, ds3 */]; 
+const independantData = [/* ds1, ds2, ds3 */]
 
 /*<~F~>--------------------------| FUNCTIONS HERE OR SEPARATE FILE |-------------------------<~F~>*/
 
@@ -51,8 +53,6 @@ const fetchDataInParallel = (dataSources, callback) => {
 };
 
 const main = async () => {
-    const depndantData = [/* ds1, ds2, ds3 */]; 
-    const independantData = [/* ds1, ds2, ds3 */]
 
     try {
         
