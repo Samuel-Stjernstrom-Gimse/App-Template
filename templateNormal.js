@@ -55,8 +55,8 @@ const main = async () => {
     const independantData = [/* ds1, ds2, ds3 */]
 
     try {
-        await executeBeforeDataFetch();
         
+        await executeBeforeDataFetch();
         fetchDataInParallel(depndantData, executeAfterDataFetch);
         independantRefresh(independantData)
         
