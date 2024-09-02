@@ -1,6 +1,6 @@
 /*//////////////| NORMAL TEMPLATE FOR WAITING ON DS DATA AND ASYNC OPERATIONS |/////////////////*/
 
-/*<~G~>--------------------------| GLOBAL VARIABLES HERE |-----------------------------------<~G~>*/
+/*<~G~>--------------------------| GLOBAL VARIABLES |-----------------------------------<~G~>*/
 const depndantData = [/* ds1, ds2, ds3 */]; 
 const independantData = [/* ds1, ds2, ds3 */]
 
