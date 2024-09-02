@@ -53,13 +53,10 @@ const fetchDataInParallel = (dataSources, callback) => {
 };
 
 const main = async () => {
-
     try {
-        
         await executeBeforeDataFetch();
         fetchDataInParallel(depndantData, executeAfterDataFetch);
         independantRefresh(independantData)
-        
     } catch (error) {
         console.error('Error in main:', error);
     }
