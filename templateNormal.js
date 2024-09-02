@@ -19,8 +19,6 @@ const executeBeforeDataFetch = async () => {
     }
 };
 
-const independantRefresh = arr => arr.forEach(ds => ds?.refreshDataSource())
-
 const executeAfterDataFetch = async () => { // Create one of these for every fetchDataInParallel() call
     try {
         // Non-blocking functions here (ideally)
@@ -32,6 +30,8 @@ const executeAfterDataFetch = async () => { // Create one of these for every fet
         console.error('Error in executeAfterDataFetch:', error);
     }
 };
+
+const independantRefresh = arr => arr.forEach(ds => ds?.refreshDataSource())
 
 /*<~In~>-------------------------| INITIALIZATION |------------------------------------------<~In~>*/
 const fetchDataInParallel = (dataSources, callback) => {
