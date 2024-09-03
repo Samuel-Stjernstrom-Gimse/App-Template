@@ -61,11 +61,11 @@ const parallelExc = (arr) => {
 };
 
 const handleFunctionCalling = (functions, key) => {
-    functions.key?.forEach(func => {
+    functions[key]?.forEach(func => {
         try {
             func?.();
         } catch (funcError) {
-            console.error('Error in beforeAsync function:', funcError);
+            console.error(`Error in ${key} function:`, funcError);
         }
     });
 };
@@ -88,7 +88,7 @@ const independantRefresh = (arr) => {
 
 const executeFunctions = async (functions) => {
     try {
-        handleFunctionCalling(functions, beforeAsync);
+        handleFunctionCalling(functions, 'beforeAsync');
 
         if (functions.asyncPromises) {
             for (const asyncGroup of functions.asyncPromises) {
@@ -96,9 +96,9 @@ const executeFunctions = async (functions) => {
             }
         }
         
-        handleFunctionCalling(functions, afterAsync);
+        handleFunctionCalling(functions, 'afterAsync');
     } catch (error) {
-        console.error('Error in executeAfterDataFetch:', error);
+        console.error('Error in executeFunctions:', error);
     }
 };
 
