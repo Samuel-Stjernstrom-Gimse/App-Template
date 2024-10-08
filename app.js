@@ -22,7 +22,7 @@ const app = async () => {
     } catch (error) {
         console.error('Error refreshing data sources:', error)
     }
-};
+}
 
 (async () => await app())()
 
