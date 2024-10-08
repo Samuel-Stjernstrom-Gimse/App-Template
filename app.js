@@ -4,7 +4,7 @@ const getData = dataSource =>
             ? reject(err)
             : resolve(!err)
         )
-    );
+    )
 
 const app = async () => {
     try {
@@ -13,18 +13,18 @@ const app = async () => {
         await Promise.all([
             getData(ds1),
             getData(ds2), // parallel loading 
-        ]);
+        ])
         
         useData()
         
         await getData(ds3) // blocking loadig
         */
     } catch (error) {
-        console.error('Error refreshing data sources:', error);
+        console.error('Error refreshing data sources:', error)
     }
 };
 
-(async () => await app())();
+(async () => await app())()
 
 
 
